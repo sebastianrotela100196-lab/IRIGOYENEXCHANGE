@@ -30,14 +30,17 @@ measurementId: "G-ZQHFR1GTQC"
 };
 
 
-// Inicializar
+// Inicializar Firebase
 
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
 
-// Función para obtener USDT
+
+// =============================
+// OBTENER USDT DESDE FIREBASE
+// =============================
 
 export async function obtenerUSDT(){
 
@@ -45,6 +48,35 @@ const referencia = doc(
 db,
 "cotizaciones",
 "USDT"
+);
+
+
+const resultado = await getDoc(referencia);
+
+
+if(resultado.exists()){
+
+return resultado.data();
+
+}
+
+
+return null;
+
+}
+
+
+
+// =============================
+// OBTENER USD/PYG DESDE FIREBASE
+// =============================
+
+export async function obtenerUSD(){
+
+const referencia = doc(
+db,
+"cotizaciones",
+"USD"
 );
 
 
