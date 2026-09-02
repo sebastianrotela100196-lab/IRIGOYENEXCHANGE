@@ -3400,7 +3400,7 @@ grid-template-columns:1fr;
 
 <script type="module">
 
-import { obtenerUSDT, obtenerUSD, obtenerConfiguracionCrypto } from './firebase-config.js';
+import { obtenerUSDT, obtenerUSD } from './firebase-config.js';
     
 let selectedCrypto="USDT";
 
@@ -3498,6 +3498,7 @@ BNB:{
 // BINANCE AUTOMATIC PRICES
 // ===============================
 
+
 async function cargarPreciosBinance(){
 
 
@@ -3511,25 +3512,14 @@ BNB:"BNBUSDT"
 };
 
 
-const usd = await obtenerUSD();
-
-const config = await obtenerConfiguracionCrypto();
-
-
-if(!usd || !config){
-
-console.log("Faltan datos Firebase");
-return;
-
-}
+// Precio dólar Paraguay
+const dolar=6000;
 
 
-const dolar = usd.venta;
+// margen del exchange
 
-
-const margenCompra = config.margenCompra / 100;
-
-const margenVenta = config.margenVenta / 100;
+const margenCompra=1.02;
+const margenVenta=0.98;
 
 
 
@@ -3540,16 +3530,16 @@ try{
 
 
 const respuesta = await fetch(
-
 `https://api.binance.com/api/v3/ticker/price?symbol=${monedas[crypto]}`
-
 );
 
 
 const data = await respuesta.json();
 
 
+
 const precioUSD = Number(data.price);
+
 
 
 const precioGs = precioUSD * dolar;
@@ -3560,17 +3550,11 @@ prices[crypto]={
 
 
 comprar:
-
-Math.round(
-precioGs - (precioGs * margenCompra)
-),
+Math.round(precioGs * margenCompra),
 
 
 vender:
-
-Math.round(
-precioGs + (precioGs * margenVenta)
-)
+Math.round(precioGs * margenVenta)
 
 
 };
@@ -3583,9 +3567,11 @@ prices[crypto]
 );
 
 
+
 }
 
 catch(error){
+
 
 console.log(
 "Error Binance:",
@@ -3593,10 +3579,13 @@ crypto,
 error
 );
 
+
 }
 
 
+
 }
+
 
 
 calculate();
@@ -3608,12 +3597,6 @@ calculate();
 // Ejecutar al cargar
 
 cargarPreciosBinance();
-
-
-setInterval(
-cargarPreciosBinance,
-60000
-);
 
 
 // actualizar cada 60 segundos
@@ -3661,30 +3644,6 @@ function changeOperation(tipo){
     calculate();
 
 }
-
-
-
-operation=tipo;
-
-
-
-document.getElementById("operationResult")
-.innerHTML=
-tipo.toUpperCase();
-
-
-
-
-calculate();
-
-
-
-}
-
-
-
-
-
 
 
 
