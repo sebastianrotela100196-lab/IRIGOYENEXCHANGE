@@ -3498,7 +3498,6 @@ BNB:{
 // BINANCE AUTOMATIC PRICES
 // ===============================
 
-
 async function cargarPreciosBinance(){
 
 
@@ -3512,29 +3511,24 @@ BNB:"BNBUSDT"
 };
 
 
-// Obtener USD/PYG desde Firebase
 const usd = await obtenerUSD();
 
-
-// Obtener configuración de márgenes desde Firebase
 const config = await obtenerConfiguracionCrypto();
 
 
 if(!usd || !config){
 
-console.log("Faltan datos de configuración Firebase");
-
+console.log("Faltan datos Firebase");
 return;
 
 }
 
 
-// Precio dólar Paraguay dinámico
 const dolar = usd.venta;
 
 
-// Márgenes comerciales Irigoyen Exchange
 const margenCompra = config.margenCompra / 100;
+
 const margenVenta = config.margenVenta / 100;
 
 
@@ -3546,16 +3540,16 @@ try{
 
 
 const respuesta = await fetch(
+
 `https://api.binance.com/api/v3/ticker/price?symbol=${monedas[crypto]}`
+
 );
 
 
 const data = await respuesta.json();
 
 
-
 const precioUSD = Number(data.price);
-
 
 
 const precioGs = precioUSD * dolar;
@@ -3566,11 +3560,17 @@ prices[crypto]={
 
 
 comprar:
-Math.round(precioGs - (precioGs * margenCompra)),
+
+Math.round(
+precioGs - (precioGs * margenCompra)
+),
 
 
 vender:
-Math.round(precioGs + (precioGs * margenVenta))
+
+Math.round(
+precioGs + (precioGs * margenVenta)
+)
 
 
 };
@@ -3583,11 +3583,9 @@ prices[crypto]
 );
 
 
-
 }
 
 catch(error){
-
 
 console.log(
 "Error Binance:",
@@ -3595,13 +3593,10 @@ crypto,
 error
 );
 
-
 }
 
 
-
 }
-
 
 
 calculate();
@@ -3613,6 +3608,12 @@ calculate();
 // Ejecutar al cargar
 
 cargarPreciosBinance();
+
+
+setInterval(
+cargarPreciosBinance,
+60000
+);
 
 
 // actualizar cada 60 segundos
