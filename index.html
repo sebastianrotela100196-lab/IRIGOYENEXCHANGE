@@ -928,6 +928,195 @@ background:#050807;
 color:white;
 }
 
+
+/* ==========================
+OPTIMIZACION MOBILE PREMIUM
+IRIGOYEN EXCHANGE
+========================== */
+
+@media(max-width:600px){
+
+body{
+overflow-x:hidden;
+}
+
+/* HEADER */
+header{
+height:70px;
+}
+
+.navbar{
+height:70px;
+}
+
+.logo{
+font-size:21px;
+}
+
+
+/* HERO */
+.hero{
+padding-top:100px;
+min-height:auto;
+}
+
+.hero-grid{
+grid-template-columns:1fr;
+gap:35px;
+}
+
+.hero h1{
+font-size:38px;
+line-height:1.15;
+letter-spacing:-1px;
+}
+
+.hero p{
+font-size:16px;
+line-height:1.6;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+.hero-buttons .btn{
+width:100%;
+}
+
+
+/* TARJETAS CONFIANZA */
+.trust{
+display:grid;
+grid-template-columns:1fr;
+gap:12px;
+}
+
+
+/* MERCADO */
+.crypto-market{
+grid-template-columns:1fr;
+gap:18px;
+}
+
+.crypto-card{
+padding:22px;
+}
+
+.crypto-coin{
+width:110px;
+height:110px;
+font-size:50px;
+}
+
+
+/* CALCULADORA */
+.calculator-box{
+padding:25px 18px;
+}
+
+.operation-buttons{
+flex-direction:column;
+}
+
+.operation-buttons .btn{
+width:100%;
+}
+
+.crypto-dropdown{
+font-size:16px;
+padding:15px;
+}
+
+.crypto-selector{
+grid-template-columns:repeat(2,1fr);
+}
+
+.crypto-select{
+padding:14px;
+}
+
+.calculator-result{
+grid-template-columns:1fr;
+padding:20px;
+}
+
+
+/* BANCOS Y METODOS */
+.bank-list{
+grid-template-columns:1fr;
+}
+
+.delivery-options{
+grid-template-columns:1fr;
+}
+
+
+/* SECCIONES */
+.section-title{
+font-size:32px;
+}
+
+.section-subtitle{
+font-size:16px;
+}
+
+.about-box{
+padding:25px;
+}
+
+.about-box p{
+font-size:16px;
+}
+
+
+/* SERVICIOS */
+.services-grid,
+.steps-grid,
+.choose-grid{
+grid-template-columns:1fr;
+}
+
+
+/* WHATSAPP */
+.floating-whatsapp{
+right:15px;
+bottom:15px;
+padding:15px 22px;
+font-size:14px;
+}
+
+
+/* FONDO CRYPTO MOBILE */
+.crypto-floating-bg .coin{
+width:55px;
+height:55px;
+font-size:22px;
+opacity:.15;
+box-shadow:0 0 18px currentColor;
+}
+
+.crypto-floating-bg .money{
+font-size:50px;
+opacity:.12;
+}
+
+}
+
+
+/* TABLET */
+@media(min-width:601px) and (max-width:1000px){
+
+.crypto-market{
+grid-template-columns:repeat(2,1fr);
+}
+
+.hero-grid{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
 
 
