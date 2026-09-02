@@ -3505,6 +3505,36 @@ BNB:{
 
 function changeOperation(tipo){
 
+    operation = tipo;
+
+    // Cambiar texto del resumen
+    document.getElementById("operationResult").innerHTML =
+    tipo.toUpperCase();
+
+
+    // Cambiar estado visual botones
+    const comprar = document.getElementById("buyOperation");
+    const vender = document.getElementById("sellOperation");
+
+
+    if(tipo === "Comprar"){
+
+        comprar.classList.add("active");
+        vender.classList.remove("active");
+
+    }else{
+
+        vender.classList.add("active");
+        comprar.classList.remove("active");
+
+    }
+
+
+    // recalcular precio
+    calculate();
+
+}
+
 
 
 operation=tipo;
