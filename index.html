@@ -3400,7 +3400,7 @@ grid-template-columns:1fr;
 
 <script type="module">
 
-import { obtenerUSDT, obtenerUSD } from './firebase-config.js';
+import { obtenerUSDT, obtenerUSD, obtenerConfiguracionCrypto } from './firebase-config.js';
     
 let selectedCrypto="USDT";
 
@@ -3512,14 +3512,30 @@ BNB:"BNBUSDT"
 };
 
 
-// Precio dólar Paraguay
-const dolar=6000;
+// Obtener USD/PYG desde Firebase
+const usd = await obtenerUSD();
 
 
-// margen del exchange
+// Obtener configuración de márgenes desde Firebase
+const config = await obtenerConfiguracionCrypto();
 
-const margenCompra=1.02;
-const margenVenta=0.98;
+
+if(!usd || !config){
+
+console.log("Faltan datos de configuración Firebase");
+
+return;
+
+}
+
+
+// Precio dólar Paraguay dinámico
+const dolar = usd.venta;
+
+
+// Márgenes comerciales Irigoyen Exchange
+const margenCompra = config.margenCompra / 100;
+const margenVenta = config.margenVenta / 100;
 
 
 
@@ -3550,11 +3566,11 @@ prices[crypto]={
 
 
 comprar:
-Math.round(precioGs * margenCompra),
+Math.round(precioGs - (precioGs * margenCompra)),
 
 
 vender:
-Math.round(precioGs * margenVenta)
+Math.round(precioGs + (precioGs * margenVenta))
 
 
 };
