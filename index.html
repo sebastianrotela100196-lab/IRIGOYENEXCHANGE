@@ -3398,9 +3398,9 @@ grid-template-columns:1fr;
 
 
 
-<script>
+<script type="module">
 
-
+import { obtenerUSDT } from './firebase-config.js';
 
 let selectedCrypto="USDT";
 
@@ -3409,6 +3409,44 @@ let operation="Comprar";
 let selectedBank="Ueno Bank";
 let selectedPayment="Transferencia bancaria";
 
+async function cargarCotizacionUSDT(){
+
+try{
+
+const usdt = await obtenerUSDT();
+
+if(usdt){
+
+prices.USDT.comprar = usdt.venta;
+prices.USDT.vender = usdt.compra;
+
+const ventaBox = document.querySelector(".green-price");
+const compraBox = document.querySelector(".red-price");
+
+if(ventaBox){
+ventaBox.innerHTML = "Gs. " + usdt.venta.toLocaleString();
+}
+
+if(compraBox){
+compraBox.innerHTML = "Gs. " + usdt.compra.toLocaleString();
+}
+
+calculate();
+
+}
+
+}catch(error){
+
+console.error("Firebase USDT:", error);
+
+}
+
+}
+
+cargarCotizacionUSDT();
+
+
+
 
 
 
@@ -3416,74 +3454,30 @@ let selectedPayment="Transferencia bancaria";
 
 const prices={
 
-
-
 USDT:{
-
-
-comprar:5960,
-
-
-vender:5800
-
-
+ comprar:5960,
+ vender:5800
 },
-
-
 
 BTC:{
-
-
-comprar:128000000,
-
-
-vender:125000000
-
-
+ comprar:0,
+ vender:0
 },
-
-
-
 
 ETH:{
-
-
-comprar:19000000,
-
-
-vender:18000000
-
-
+ comprar:0,
+ vender:0
 },
-
-
-
 
 SOL:{
-
-
-comprar:950000,
-
-
-vender:900000
-
-
+ comprar:0,
+ vender:0
 },
 
-
-
-
 BNB:{
-
-
-comprar:4200000,
-
-
-vender:4000000
-
-
+ comprar:0,
+ vender:0
 }
-
 
 };
 
