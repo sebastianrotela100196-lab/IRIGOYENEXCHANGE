@@ -3494,7 +3494,117 @@ BNB:{
 }
 
 };
+// ===============================
+// BINANCE AUTOMATIC PRICES
+// ===============================
 
+
+async function cargarPreciosBinance(){
+
+
+const monedas={
+
+BTC:"BTCUSDT",
+ETH:"ETHUSDT",
+SOL:"SOLUSDT",
+BNB:"BNBUSDT"
+
+};
+
+
+// Precio dólar Paraguay
+const dolar=7500;
+
+
+// margen del exchange
+
+const margenCompra=1.02;
+const margenVenta=0.98;
+
+
+
+for(let crypto in monedas){
+
+
+try{
+
+
+const respuesta = await fetch(
+`https://api.binance.com/api/v3/ticker/price?symbol=${monedas[crypto]}`
+);
+
+
+const data = await respuesta.json();
+
+
+
+const precioUSD = Number(data.price);
+
+
+
+const precioGs = precioUSD * dolar;
+
+
+
+prices[crypto]={
+
+
+comprar:
+Math.round(precioGs * margenCompra),
+
+
+vender:
+Math.round(precioGs * margenVenta)
+
+
+};
+
+
+
+console.log(
+crypto,
+prices[crypto]
+);
+
+
+
+}
+
+catch(error){
+
+
+console.log(
+"Error Binance:",
+crypto,
+error
+);
+
+
+}
+
+
+
+}
+
+
+
+calculate();
+
+
+}
+
+
+// Ejecutar al cargar
+
+cargarPreciosBinance();
+
+
+// actualizar cada 60 segundos
+
+setInterval(
+cargarPreciosBinance,
+60000
+);
 
 
 
