@@ -910,6 +910,24 @@ filter:blur(.3px) drop-shadow(0 0 35px currentColor);
 }
 
 
+
+.crypto-dropdown{
+width:100%;
+background:#050807;
+border:1px solid #263238;
+padding:18px;
+border-radius:15px;
+color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+margin:25px 0;
+}
+.crypto-dropdown option{
+background:#050807;
+color:white;
+}
+
 </style>
 
 
@@ -2661,6 +2679,14 @@ Seleccioná tu activo
 
 
 
+<select id="cryptoDropdown" class="crypto-dropdown" onchange="selectCryptoDropdown(this.value)">
+<option value="USDT">USDT - Tether</option>
+<option value="BTC">BTC - Bitcoin</option>
+<option value="ETH">ETH - Ethereum</option>
+<option value="SOL">SOL - Solana</option>
+<option value="BNB">BNB - Binance Coin</option>
+</select>
+
 <div class="crypto-selector">
 
 
@@ -3433,7 +3459,32 @@ selectedBank=document.getElementById("bankSelect").value;
 selectedPayment=document.getElementById("paymentSelect").value;
 }
 
+
+function selectCryptoDropdown(nombre){
+
+selectedCrypto=nombre;
+
+document.querySelectorAll(".crypto-select").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+document.querySelectorAll(".crypto-select").forEach(btn=>{
+if(btn.innerHTML.trim()==nombre){
+btn.classList.add("active");
+}
+});
+
+document.getElementById("cryptoResult").innerHTML=nombre;
+
+let dropdown=document.getElementById("cryptoDropdown");
+if(dropdown){dropdown.value=nombre;}
+
+calculate();
+
+}
+
 function calculate(){
+
 
 
 
