@@ -3644,6 +3644,14 @@ precio.vender.toLocaleString()+" Gs";
 cargarPreciosBinance();
 
 
+// Forzar actualización visual inicial después de cargar datos
+setTimeout(()=>{
+    if(typeof cargarPreciosBinance === "function"){
+        cargarPreciosBinance();
+    }
+},2000);
+
+
 // actualizar cada 60 segundos
 
 setInterval(
