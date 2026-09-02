@@ -1701,7 +1701,7 @@ Venta
 
 class="btn buy"
 
-onclick="goCalculator('BTC')">
+onclick="goCryptoQuote('BTC')">
 
 
 COTIZAR BTC
@@ -1806,7 +1806,7 @@ Venta
 
 class="btn buy"
 
-onclick="goCalculator('ETH')">
+onclick="goCryptoQuote('ETH')">
 
 
 COTIZAR ETH
@@ -1909,7 +1909,7 @@ Venta
 
 class="btn buy"
 
-onclick="goCalculator('USDT')">
+onclick="goCryptoQuote('USDT')">
 
 
 COTIZAR USDT
@@ -2009,7 +2009,7 @@ Venta
 
 class="btn buy"
 
-onclick="goCalculator('SOL')">
+onclick="goCryptoQuote('SOL')">
 
 
 COTIZAR SOL
@@ -2109,7 +2109,7 @@ Venta
 
 class="btn buy"
 
-onclick="goCalculator('BNB')">
+onclick="goCryptoQuote('BNB')">
 
 
 COTIZAR BNB
@@ -5228,8 +5228,68 @@ setTimeout(()=>requestMove(particle),initialDelay);
 });
 </script>
 
+
+<script>
+function goCryptoQuote(crypto){
+
+    const calc = document.getElementById('calculadora');
+
+    if(calc){
+        calc.scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+    }
+
+    setTimeout(()=>{
+
+        const buttons = document.querySelectorAll('.crypto-select');
+
+        buttons.forEach(btn=>{
+
+            if(btn.innerText.trim().toUpperCase() === crypto.toUpperCase()){
+                btn.click();
+            }
+
+        });
+
+    },600);
+
+}
+</script>
+
 </body>
 
-</html></body>
+</html>
+<script>
+function goCryptoQuote(crypto){
+
+    const calc = document.getElementById('calculadora');
+
+    if(calc){
+        calc.scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+    }
+
+    setTimeout(()=>{
+
+        const buttons = document.querySelectorAll('.crypto-select');
+
+        buttons.forEach(btn=>{
+
+            if(btn.innerText.trim().toUpperCase() === crypto.toUpperCase()){
+                btn.click();
+            }
+
+        });
+
+    },600);
+
+}
+</script>
+
+</body>
 
 </html>
