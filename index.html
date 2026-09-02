@@ -2022,10 +2022,10 @@ Compra
 </p>
 
 
-<strong>
-
+<strong id="marketUSDTCompra">
+    
 5.800 Gs
-
+    
 </strong>
 
 
@@ -2038,10 +2038,10 @@ Venta
 </p>
 
 
-<span>
-
+<span id="marketUSDTVenta">
+    
 5.960 Gs
-
+    
 </span>
 
 
@@ -3419,7 +3419,21 @@ if(usdt){
 
 prices.USDT.comprar = usdt.venta;
 prices.USDT.vender = usdt.compra;
+    
+const marketCompra = document.getElementById("marketUSDTCompra");
+const marketVenta = document.getElementById("marketUSDTVenta");
 
+
+if(marketCompra){
+    marketCompra.innerHTML =
+    "Gs. " + usdt.compra.toLocaleString();
+}
+
+
+if(marketVenta){
+    marketVenta.innerHTML =
+    "Gs. " + usdt.venta.toLocaleString();
+}
 const ventaBox = document.querySelector(".green-price");
 const compraBox = document.querySelector(".red-price");
 
