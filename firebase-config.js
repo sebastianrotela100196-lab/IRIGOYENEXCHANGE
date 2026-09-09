@@ -286,3 +286,82 @@ ultimaActualizacion: serverTimestamp()
 
 
 }
+
+// =======================================
+// OBTENER MÁRGENES CRYPTO
+// =======================================
+
+export async function obtenerMargenesCrypto(){
+
+
+const referencia = doc(
+db,
+"cotizaciones",
+"configuracion"
+);
+
+
+
+const resultado = await getDoc(referencia);
+
+
+
+if(resultado.exists()){
+
+
+const datos = resultado.data();
+
+
+return datos.crypto;
+
+
+}
+
+
+
+return null;
+
+
+
+}
+
+
+
+
+
+// =======================================
+// ACTUALIZAR MÁRGENES CRYPTO
+// =======================================
+
+export async function actualizarMargenesCrypto(
+compra,
+venta
+){
+
+
+const referencia = doc(
+db,
+"cotizaciones",
+"configuracion"
+);
+
+
+
+await updateDoc(
+referencia,
+{
+
+crypto:{
+
+margenCompra:Number(compra),
+
+margenVenta:Number(venta)
+
+}
+
+}
+
+);
+
+
+}
