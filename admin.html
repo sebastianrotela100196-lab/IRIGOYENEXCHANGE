@@ -147,6 +147,7 @@ background:#c62828;
 }
 
 
+
 .info{
 
 color:#00c95b;
@@ -334,7 +335,9 @@ import {
 
 app,
 
-obtenerCotizacionesAdmin
+obtenerCotizacionesAdmin,
+
+actualizarCotizacion
 
 }
 
@@ -392,7 +395,6 @@ login.style.display="none";
 panel.style.display="block";
 
 
-// cargar precios
 
 cargarCotizaciones();
 
@@ -494,6 +496,92 @@ document.getElementById("estado").innerHTML =
 
 
 }
+
+
+
+
+
+
+
+// =============================
+// GUARDAR CAMBIOS
+// =============================
+
+
+document
+.getElementById("guardar")
+.onclick=async()=>{
+
+
+const usdtCompra =
+document.getElementById("usdtCompra").value;
+
+
+const usdtVenta =
+document.getElementById("usdtVenta").value;
+
+
+
+const usdCompra =
+document.getElementById("usdCompra").value;
+
+
+const usdVenta =
+document.getElementById("usdVenta").value;
+
+
+
+try{
+
+
+await actualizarCotizacion(
+
+"USDT",
+
+usdtCompra,
+
+usdtVenta
+
+);
+
+
+
+await actualizarCotizacion(
+
+"USD",
+
+usdCompra,
+
+usdVenta
+
+);
+
+
+
+document.getElementById("estado").innerHTML =
+
+"✅ Cambios guardados correctamente";
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+document.getElementById("estado").innerHTML =
+
+"❌ Error guardando cambios";
+
+
+}
+
+
+
+};
 
 
 
