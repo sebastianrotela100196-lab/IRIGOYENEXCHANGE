@@ -1131,6 +1131,57 @@ grid-template-columns:1fr;
     margin-bottom:35px;
 }
 
+
+
+/* ==========================
+VIDEOS EDUCATIVOS
+========================== */
+.video-section{
+    padding:90px 0;
+}
+
+.video-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+}
+
+.video-card{
+    background:#0B1511;
+    border:1px solid #263238;
+    border-radius:30px;
+    padding:25px;
+    transition:.3s;
+}
+
+.video-card:hover{
+    transform:translateY(-8px);
+    border-color:#078F3D;
+}
+
+.video-card iframe{
+    width:100%;
+    height:420px;
+    border-radius:20px;
+    border:none;
+}
+
+.video-card h3{
+    margin-top:20px;
+    font-size:24px;
+    color:#078F3D;
+}
+
+.video-card p{
+    color:#F9F5EA;
+    margin-top:10px;
+    line-height:1.6;
+}
+
+@media(max-width:800px){
+.video-grid{grid-template-columns:1fr;}
+.video-card iframe{height:350px;}
+}
 </style>
 
 
@@ -4713,6 +4764,41 @@ WHATSAPP
 
 
 
+
+
+
+<!-- ==========================
+VIDEOS EDUCATIVOS
+========================== -->
+
+<section class="video-section">
+<div class="container">
+
+<h2 class="section-title">
+Aprende con <span>Irigoyen Exchange</span>
+</h2>
+
+<p class="section-subtitle">
+Conoce cómo funciona nuestro servicio y opera con mayor seguridad.
+</p>
+
+<div class="video-grid">
+
+<div class="video-card">
+<iframe src="https://www.instagram.com/reel/Db7HWQ2soMf/embed/" allowfullscreen></iframe>
+<h3>¿Cómo comprar y vender USDT con nosotros?</h3>
+<p>Te mostramos el proceso completo para realizar una operación segura con Irigoyen Exchange.</p>
+</div>
+
+<div class="video-card">
+<iframe src="https://www.instagram.com/reel/DbOKmYJN29L/embed/" allowfullscreen></iframe>
+<h3>Conoce Irigoyen Exchange</h3>
+<p>Descubre quiénes somos y cómo trabajamos en el intercambio de criptomonedas en Paraguay.</p>
+</div>
+
+</div>
+</div>
+</section>
 
 <!-- ==========================
 FOOTER
