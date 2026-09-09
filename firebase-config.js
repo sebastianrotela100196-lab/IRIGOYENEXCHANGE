@@ -59,6 +59,7 @@ const db = getFirestore(app);
 
 
 
+
 // =======================================
 // OBTENER USDT
 // =======================================
@@ -88,12 +89,11 @@ return resultado.data();
 }
 
 
-
 return null;
 
 
-
 }
+
 
 
 
@@ -128,12 +128,12 @@ return resultado.data();
 }
 
 
-
 return null;
 
 
-
 }
+
+
 
 
 
@@ -165,25 +165,25 @@ if(resultado.exists()){
 const datos = resultado.data();
 
 
-return datos.crypto;
+return datos.crypto || null;
 
 
 }
-
 
 
 return null;
 
 
-
 }
+
+
 
 
 
 
 
 // =======================================
-// OBTENER COTIZACIONES PARA ADMIN
+// OBTENER COTIZACIONES ADMIN
 // =======================================
 
 
@@ -248,8 +248,10 @@ null
 
 
 
+
+
 // =======================================
-// ACTUALIZAR COTIZACIONES
+// ACTUALIZAR USDT / USD
 // =======================================
 
 
@@ -287,9 +289,17 @@ ultimaActualizacion: serverTimestamp()
 
 }
 
+
+
+
+
+
+
+
 // =======================================
 // OBTENER MÁRGENES CRYPTO
 // =======================================
+
 
 export async function obtenerMargenesCrypto(){
 
@@ -312,7 +322,7 @@ if(resultado.exists()){
 const datos = resultado.data();
 
 
-return datos.crypto;
+return datos.crypto || null;
 
 
 }
@@ -322,8 +332,10 @@ return datos.crypto;
 return null;
 
 
-
 }
+
+
+
 
 
 
@@ -333,10 +345,12 @@ return null;
 // ACTUALIZAR MÁRGENES CRYPTO
 // =======================================
 
+
 export async function actualizarMargenesCrypto(
 compra,
 venta
 ){
+
 
 
 const referencia = doc(
@@ -357,11 +371,14 @@ margenCompra:Number(compra),
 
 margenVenta:Number(venta)
 
-}
+},
+
+ultimaActualizacion: serverTimestamp()
 
 }
 
 );
+
 
 
 }
