@@ -100,6 +100,7 @@ margin-top:15px;
 }
 
 
+
 button:hover{
 
 background:#00c95b;
@@ -130,6 +131,7 @@ margin-top:20px;
 }
 
 
+
 h2{
 
 margin-top:0;
@@ -145,10 +147,19 @@ background:#c62828;
 }
 
 
+.info{
+
+color:#00c95b;
+font-size:14px;
+margin-top:10px;
+
+}
+
+
 </style>
 
-
 </head>
+
 
 
 <body>
@@ -160,6 +171,8 @@ background:#c62828;
 <div class="logo">
 IRIGOYEN <span>EXCHANGE</span>
 </div>
+
+
 
 
 
@@ -185,7 +198,9 @@ placeholder="Contraseña">
 
 
 <button id="btnLogin">
+
 INGRESAR
+
 </button>
 
 
@@ -198,7 +213,9 @@ INGRESAR
 
 
 
-<!-- PANEL -->
+
+
+<!-- PANEL ADMIN -->
 
 
 <div id="panel">
@@ -209,39 +226,45 @@ Panel de Control
 </h2>
 
 
-
 <div class="card">
+
 
 <h3>
 USDT
 </h3>
 
 
-<input id="usdtCompra"
+<input 
+id="usdtCompra"
 placeholder="Compra">
 
 
-<input id="usdtVenta"
+<input 
+id="usdtVenta"
 placeholder="Venta">
 
 
 </div>
+
 
 
 
 
 <div class="card">
 
+
 <h3>
 USD / PYG
 </h3>
 
 
-<input id="usdCompra"
+<input 
+id="usdCompra"
 placeholder="Compra">
 
 
-<input id="usdVenta"
+<input 
+id="usdVenta"
 placeholder="Venta">
 
 
@@ -249,21 +272,38 @@ placeholder="Venta">
 
 
 
-<button>
+<p class="info" id="estado">
+
+Cargando cotizaciones...
+
+</p>
+
+
+
+<button id="guardar">
+
 GUARDAR CAMBIOS
+
 </button>
+
 
 
 <button class="logout" id="logout">
+
 CERRAR SESIÓN
+
 </button>
 
 
+
+</div>
+
+
+
 </div>
 
 
 
-</div>
 
 
 
@@ -288,14 +328,23 @@ from
 
 
 
-import {app}
+
+
+import {
+
+app,
+
+obtenerCotizacionesAdmin
+
+}
 
 from "./firebase-config.js";
 
 
 
-const auth=getAuth(app);
 
+
+const auth=getAuth(app);
 
 
 
@@ -306,6 +355,11 @@ const panel=document.getElementById("panel");
 
 
 
+
+
+// =============================
+// LOGIN
+// =============================
 
 
 document
@@ -338,7 +392,14 @@ login.style.display="none";
 panel.style.display="block";
 
 
+// cargar precios
+
+cargarCotizaciones();
+
+
+
 }
+
 
 catch(error){
 
@@ -359,6 +420,94 @@ document.getElementById("mensaje")
 
 
 
+// =============================
+// CARGAR COTIZACIONES
+// =============================
+
+
+async function cargarCotizaciones(){
+
+
+try{
+
+
+const datos = await obtenerCotizacionesAdmin();
+
+
+
+
+
+if(datos.USDT){
+
+
+document.getElementById("usdtCompra").value =
+datos.USDT.compra;
+
+
+document.getElementById("usdtVenta").value =
+datos.USDT.venta;
+
+
+}
+
+
+
+
+
+if(datos.USD){
+
+
+document.getElementById("usdCompra").value =
+datos.USD.compra;
+
+
+document.getElementById("usdVenta").value =
+datos.USD.venta;
+
+
+}
+
+
+
+
+
+document.getElementById("estado").innerHTML =
+
+"✅ Cotizaciones cargadas correctamente";
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+document.getElementById("estado").innerHTML =
+
+"❌ Error cargando cotizaciones";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+// =============================
+// CERRAR SESIÓN
+// =============================
+
+
 document
 .getElementById("logout")
 .onclick=()=>{
@@ -374,7 +523,9 @@ location.reload();
 
 
 
+
 </script>
+
 
 
 </body>
