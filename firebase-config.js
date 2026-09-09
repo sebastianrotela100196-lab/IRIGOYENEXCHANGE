@@ -46,7 +46,7 @@ measurementId: "G-ZQHFR1GTQC"
 // Inicializar Firebase
 
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
 
 const db = getFirestore(app);
