@@ -1,1 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Irigoyen Exchange Admin</title>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+
+body{
+
+margin:0;
+background:#050807;
+color:white;
+
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+
+}
+
+
+.container{
+
+width:420px;
+background:#0b1512;
+border:1px solid #18362c;
+border-radius:20px;
+padding:35px;
+
+box-shadow:0 0 40px #00ff8830;
+
+}
+
+
+.logo{
+
+text-align:center;
+font-size:28px;
+font-weight:bold;
+margin-bottom:30px;
+
+}
+
+
+.logo span{
+
+color:#00b94f;
+
+}
+
+
+
+input{
+
+width:100%;
+padding:14px;
+margin:10px 0;
+
+background:#050807;
+border:1px solid #243d34;
+
+border-radius:10px;
+
+color:white;
+font-size:15px;
+
+}
+
+
+
+button{
+
+width:100%;
+padding:14px;
+
+border:none;
+border-radius:10px;
+
+background:#009b45;
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+margin-top:15px;
+
+}
+
+
+button:hover{
+
+background:#00c95b;
+
+}
+
+
+
+#panel{
+
+display:none;
+
+}
+
+
+.card{
+
+background:#07100d;
+
+border:1px solid #18362c;
+
+padding:20px;
+
+border-radius:15px;
+
+margin-top:20px;
+
+}
+
+
+h2{
+
+margin-top:0;
+
+}
+
+
+
+.logout{
+
+background:#c62828;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+IRIGOYEN <span>EXCHANGE</span>
+</div>
+
+
+
+<!-- LOGIN -->
+
+<div id="login">
+
+
+<h2>Administrador</h2>
+
+
+<input 
+id="email"
+type="email"
+placeholder="Correo">
+
+
+<input
+id="password"
+type="password"
+placeholder="Contraseña">
+
+
+
+<button id="btnLogin">
+INGRESAR
+</button>
+
+
+<p id="mensaje"></p>
+
+
+</div>
+
+
+
+
+
+<!-- PANEL -->
+
+
+<div id="panel">
+
+
+<h2>
+Panel de Control
+</h2>
+
+
+
+<div class="card">
+
+<h3>
+USDT
+</h3>
+
+
+<input id="usdtCompra"
+placeholder="Compra">
+
+
+<input id="usdtVenta"
+placeholder="Venta">
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+USD / PYG
+</h3>
+
+
+<input id="usdCompra"
+placeholder="Compra">
+
+
+<input id="usdVenta"
+placeholder="Venta">
+
+
+</div>
+
+
+
+<button>
+GUARDAR CAMBIOS
+</button>
+
+
+<button class="logout" id="logout">
+CERRAR SESIÓN
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script type="module">
+
+
+import {
+
+getAuth,
+
+signInWithEmailAndPassword,
+
+signOut
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+
+import {app}
+
+from "./firebase-config.js";
+
+
+
+const auth=getAuth(app);
+
+
+
+
+
+const login=document.getElementById("login");
+
+const panel=document.getElementById("panel");
+
+
+
+
+
+document
+.getElementById("btnLogin")
+.onclick=async()=>{
+
+
+let email=
+document.getElementById("email").value;
+
+
+let password=
+document.getElementById("password").value;
+
+
+
+try{
+
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+
+
+login.style.display="none";
+
+panel.style.display="block";
+
+
+}
+
+catch(error){
+
+
+document.getElementById("mensaje")
+.innerHTML="Datos incorrectos";
+
+
+}
+
+
+
+};
+
+
+
+
+
+
+
+document
+.getElementById("logout")
+.onclick=()=>{
+
+
+signOut(auth);
+
+
+location.reload();
+
+
+};
+
+
+
+</script>
+
+
+</body>
+
+</html>
