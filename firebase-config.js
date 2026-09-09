@@ -11,7 +11,8 @@ initializeApp
 import { 
 getFirestore,
 doc,
-getDoc
+getDoc,
+updateDoc
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
@@ -238,6 +239,40 @@ null
 
 };
 
+
+
+}
+// =======================================
+// ACTUALIZAR COTIZACIONES
+// =======================================
+
+
+export async function actualizarCotizacion(
+moneda,
+compra,
+venta
+){
+
+
+const referencia = doc(
+db,
+"cotizaciones",
+moneda
+);
+
+
+
+await updateDoc(
+referencia,
+{
+
+compra:Number(compra),
+
+venta:Number(venta)
+
+}
+
+);
 
 
 }
