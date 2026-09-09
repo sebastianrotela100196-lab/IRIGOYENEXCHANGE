@@ -4,9 +4,12 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>Irigoyen Exchange Admin</title>
+
 
 
 <style>
@@ -29,6 +32,7 @@ margin:0;
 
 min-height:100vh;
 
+
 display:flex;
 
 justify-content:center;
@@ -36,15 +40,98 @@ justify-content:center;
 align-items:center;
 
 
+
 background:
 
-radial-gradient(circle at top,#0b3d2b,#020504 60%);
+radial-gradient(circle at 20% 20%,#063b2b 0%,transparent 35%),
+
+radial-gradient(circle at 80% 80%,#0b1638 0%,transparent 35%),
+
+
+#020504;
 
 
 color:white;
 
 
+overflow-x:hidden;
+
+
 }
+
+
+
+/* EFECTO LUZ DE FONDO */
+
+
+body::before{
+
+
+content:"";
+
+
+position:fixed;
+
+
+width:350px;
+
+height:350px;
+
+
+background:#00ff8840;
+
+
+filter:blur(120px);
+
+
+top:-100px;
+
+
+left:-100px;
+
+
+z-index:-1;
+
+
+}
+
+
+
+body::after{
+
+
+content:"";
+
+
+position:fixed;
+
+
+width:350px;
+
+height:350px;
+
+
+background:#4169ff30;
+
+
+filter:blur(120px);
+
+
+bottom:-100px;
+
+
+right:-100px;
+
+
+z-index:-1;
+
+
+}
+
+
+
+
+
 
 
 
@@ -54,31 +141,84 @@ color:white;
 .container{
 
 
-width:440px;
+width:470px;
+
 
 padding:35px;
 
 
 background:
 
-rgba(10,20,16,0.85);
+
+rgba(255,255,255,0.06);
 
 
-border:1px solid #1c4938;
+
+border-radius:30px;
 
 
-border-radius:25px;
+
+border:1px solid rgba(255,255,255,0.12);
 
 
-backdrop-filter:blur(15px);
+
+backdrop-filter:blur(25px);
+
 
 
 box-shadow:
 
-0 0 50px rgba(0,255,120,.15);
+
+0 25px 80px rgba(0,0,0,.6),
+
+
+inset 0 0 40px rgba(255,255,255,.03);
+
+
+
+animation:
+
+entrada .6s ease;
+
 
 
 }
+
+
+
+
+
+@keyframes entrada{
+
+
+from{
+
+
+opacity:0;
+
+transform:translateY(30px);
+
+
+}
+
+
+
+to{
+
+
+opacity:1;
+
+transform:translateY(0);
+
+
+}
+
+
+
+}
+
+
+
 
 
 
@@ -91,15 +231,17 @@ box-shadow:
 
 text-align:center;
 
-margin-bottom:25px;
+
+font-size:34px;
 
 
-font-size:30px;
-
-font-weight:800;
+font-weight:900;
 
 
-letter-spacing:1px;
+letter-spacing:2px;
+
+
+margin-bottom:8px;
 
 
 }
@@ -108,9 +250,19 @@ letter-spacing:1px;
 
 .logo span{
 
-color:#00d85a;
+
+color:#00e676;
+
+
+text-shadow:
+
+0 0 20px #00e676;
+
 
 }
+
+
+
 
 
 
@@ -119,13 +271,17 @@ color:#00d85a;
 
 text-align:center;
 
-font-size:13px;
 
-color:#8ca99c;
+color:#8fa99b;
 
-margin-top:-20px;
 
-margin-bottom:30px;
+font-size:14px;
+
+
+letter-spacing:1px;
+
+
+margin-bottom:25px;
 
 
 }
@@ -141,7 +297,8 @@ margin-bottom:30px;
 h2{
 
 
-font-size:22px;
+font-size:24px;
+
 
 margin-bottom:20px;
 
@@ -153,11 +310,14 @@ margin-bottom:20px;
 h3{
 
 
-margin-top:0;
+margin:0 0 15px 0;
+
 
 display:flex;
 
+
 align-items:center;
+
 
 gap:10px;
 
@@ -169,7 +329,8 @@ gap:10px;
 
 
 
-/* INPUTS */
+
+/* INPUTS GLASS */
 
 
 input{
@@ -184,13 +345,18 @@ padding:15px;
 margin:10px 0;
 
 
-background:#050807;
+
+background:
+
+rgba(0,0,0,.35);
 
 
-border:1px solid #26483a;
+
+border:1px solid rgba(255,255,255,.15);
 
 
-border-radius:12px;
+
+border-radius:14px;
 
 
 color:white;
@@ -202,6 +368,7 @@ font-size:16px;
 outline:none;
 
 
+
 transition:.3s;
 
 
@@ -210,13 +377,17 @@ transition:.3s;
 
 
 
+
 input:focus{
 
 
-border-color:#00d85a;
+border-color:#00e676;
 
 
-box-shadow:0 0 12px #00d85a55;
+
+box-shadow:
+
+0 0 20px #00e67655;
 
 
 }
@@ -227,7 +398,9 @@ box-shadow:0 0 12px #00d85a55;
 
 
 
-/* BOTONES */
+
+
+/* BOTONES LIQUID GLASS */
 
 
 button{
@@ -236,16 +409,34 @@ button{
 width:100%;
 
 
-padding:15px;
+padding:16px;
 
 
-border:none;
+margin-top:15px;
 
 
-border-radius:12px;
+
+border-radius:18px;
 
 
-background:#00a94f;
+
+border:1px solid rgba(255,255,255,.25);
+
+
+
+background:
+
+
+linear-gradient(
+
+135deg,
+
+rgba(0,255,120,.35),
+
+rgba(0,180,90,.15)
+
+);
+
 
 
 color:white;
@@ -260,10 +451,21 @@ font-size:15px;
 cursor:pointer;
 
 
-margin-top:15px;
+backdrop-filter:blur(15px);
 
 
-transition:.3s;
+
+box-shadow:
+
+
+0 10px 30px rgba(0,255,120,.25),
+
+
+inset 0 0 20px rgba(255,255,255,.15);
+
+
+
+transition:.35s;
 
 
 }
@@ -273,13 +475,22 @@ transition:.3s;
 button:hover{
 
 
-background:#00d85a;
+transform:
+
+translateY(-3px);
 
 
-transform:translateY(-2px);
+box-shadow:
+
+
+0 15px 40px rgba(0,255,120,.45);
 
 
 }
+
+
+
+
 
 
 
@@ -287,6 +498,7 @@ transform:translateY(-2px);
 
 
 opacity:.6;
+
 
 cursor:not-allowed;
 
@@ -299,7 +511,7 @@ cursor:not-allowed;
 
 
 
-/* LOGIN */
+/* PANEL */
 
 
 #panel{
@@ -315,41 +527,65 @@ display:none;
 
 
 
-
 /* TARJETAS */
 
 
 .card{
 
 
+padding:22px;
+
+
+margin-top:20px;
+
+
+border-radius:22px;
+
+
+
 background:
+
 
 linear-gradient(
 
 145deg,
 
-#08140f,
+rgba(255,255,255,.08),
 
-#050807
+rgba(255,255,255,.03)
 
 );
 
 
-border:1px solid #17392b;
 
+border:1px solid rgba(255,255,255,.12);
 
-padding:20px;
-
-
-border-radius:18px;
-
-
-margin-top:18px;
 
 
 box-shadow:
 
-inset 0 0 20px #00ff8810;
+
+inset 0 0 25px rgba(255,255,255,.03),
+
+
+0 15px 40px rgba(0,0,0,.35);
+
+
+
+transition:.3s;
+
+
+}
+
+
+
+.card:hover{
+
+
+transform:translateY(-4px);
+
+
+border-color:#00e676;
 
 
 }
@@ -362,9 +598,11 @@ inset 0 0 20px #00ff8810;
 .icon{
 
 
-font-size:25px;
+font-size:28px;
+
 
 }
+
 
 
 
@@ -377,16 +615,16 @@ font-size:25px;
 .info{
 
 
-margin-top:15px;
+text-align:center;
+
+
+margin-top:18px;
 
 
 font-size:14px;
 
 
-color:#00d85a;
-
-
-text-align:center;
+color:#00e676;
 
 
 }
@@ -396,25 +634,43 @@ text-align:center;
 
 
 
-/* BOTON SALIR */
+
+
+/* LOGOUT */
 
 
 .logout{
 
 
-background:#c62828;
+background:
+
+
+linear-gradient(
+
+135deg,
+
+rgba(255,0,0,.4),
+
+rgba(150,0,0,.2)
+
+);
+
 
 
 }
+
 
 
 .logout:hover{
 
 
-background:#e53935;
+box-shadow:
+
+0 15px 35px rgba(255,0,0,.4);
 
 
 }
+
 
 
 
@@ -430,33 +686,42 @@ background:#e53935;
 position:fixed;
 
 
-bottom:30px;
+bottom:35px;
 
 
 left:50%;
 
 
+
 transform:
 
-translateX(-50%)
-
-translateY(100px);
+translate(-50%,120px);
 
 
 
-background:#00b94f;
+padding:16px 30px;
 
 
-padding:15px 25px;
+border-radius:20px;
 
 
-border-radius:15px;
+background:
+
+
+rgba(0,200,90,.85);
+
+
+
+backdrop-filter:blur(20px);
+
 
 
 font-weight:bold;
 
 
+
 opacity:0;
+
 
 
 transition:.4s;
@@ -464,10 +729,13 @@ transition:.4s;
 
 box-shadow:
 
-0 0 30px #00ff8866;
+
+0 0 40px #00ff8866;
 
 
 }
+
+
 
 
 
@@ -479,9 +747,7 @@ opacity:1;
 
 transform:
 
-translateX(-50%)
-
-translateY(0);
+translate(-50%,0);
 
 
 }
@@ -491,22 +757,19 @@ translateY(0);
 
 
 
-/* INDICADOR */
-
-
 .connection{
 
 
 text-align:center;
 
 
-font-size:12px;
+font-size:13px;
 
 
-color:#00d85a;
+color:#00e676;
 
 
-margin-bottom:15px;
+margin-bottom:20px;
 
 
 }
@@ -523,7 +786,6 @@ margin-bottom:15px;
 <body>
 
 
-
 <div class="container">
 
 
@@ -538,7 +800,7 @@ IRIGOYEN <span>EXCHANGE</span>
 
 <div class="subtitle">
 
-Digital Asset Management
+ADMIN CONTROL PANEL • DIGITAL ASSETS
 
 </div>
 <!-- ==========================
@@ -550,7 +812,7 @@ LOGIN ADMIN
 
 
 <h2>
-🔐 Administrador
+🔐 Acceso Administrador
 </h2>
 
 
@@ -563,17 +825,23 @@ placeholder="Correo electrónico">
 
 
 <input
+
 id="password"
+
 type="password"
+
 placeholder="Contraseña">
+
+
 
 
 
 <button id="btnLogin">
 
-INGRESAR
+🔓 INGRESAR AL PANEL
 
 </button>
+
 
 
 
@@ -582,6 +850,9 @@ INGRESAR
 
 
 </div>
+
+
+
 
 
 
@@ -598,6 +869,8 @@ PANEL CONTROL
 
 
 
+
+
 <div class="connection">
 
 🟢 Firebase conectado
@@ -608,9 +881,10 @@ PANEL CONTROL
 
 
 
+
 <h2>
 
-Panel de Control
+📊 Panel de Control
 
 </h2>
 
@@ -619,7 +893,11 @@ Panel de Control
 
 
 
-<!-- USDT -->
+
+
+<!-- ==========================
+USDT
+========================== -->
 
 
 <div class="card">
@@ -628,38 +906,61 @@ Panel de Control
 <h3>
 
 <span class="icon">
+
 🟢
+
 </span>
 
-USDT - Tether
+
+USDT • Tether
+
 
 </h3>
 
 
 
+<p style="color:#8fa99b;font-size:13px">
+
+Cotización manual en Guaraníes
+
+</p>
+
+
+
+
 <label>
 
-Compra (Gs.)
+Precio compra (Gs.)
 
 </label>
 
 
-<input 
+
+<input
+
 id="usdtCompra"
-placeholder="Compra">
+
+placeholder="Ejemplo: 5690">
+
+
 
 
 
 <label>
 
-Venta (Gs.)
+Precio venta (Gs.)
 
 </label>
 
 
-<input 
+
+<input
+
 id="usdtVenta"
-placeholder="Venta">
+
+placeholder="Ejemplo: 5850">
+
+
 
 
 
@@ -673,7 +974,9 @@ placeholder="Venta">
 
 
 
-<!-- USD -->
+<!-- ==========================
+USD
+========================== -->
 
 
 <div class="card">
@@ -691,7 +994,17 @@ placeholder="Venta">
 
 USD / PYG
 
+
 </h3>
+
+
+
+<p style="color:#8fa99b;font-size:13px">
+
+Dólar Paraguay
+
+</p>
+
 
 
 
@@ -702,11 +1015,13 @@ Compra (Gs.)
 </label>
 
 
+
 <input
 
 id="usdCompra"
 
-placeholder="Compra">
+placeholder="Ejemplo: 5900">
+
 
 
 
@@ -719,11 +1034,14 @@ Venta (Gs.)
 </label>
 
 
+
 <input
 
 id="usdVenta"
 
-placeholder="Venta">
+placeholder="Ejemplo: 5980">
+
+
 
 
 
@@ -737,7 +1055,9 @@ placeholder="Venta">
 
 
 
-<!-- CRYPTO -->
+<!-- ==========================
+CRYPTO BINANCE
+========================== -->
 
 
 <div class="card">
@@ -755,16 +1075,20 @@ placeholder="Venta">
 
 Configuración Crypto
 
+
 </h3>
 
 
 
 
-<p style="color:#8ca99c;font-size:13px">
+<p style="color:#8fa99b;font-size:13px">
 
-Margen automático aplicado a Binance
+Margen aplicado automáticamente al precio Binance
 
 </p>
+
+
+
 
 
 
@@ -774,6 +1098,7 @@ Margen automático aplicado a Binance
 Margen compra (%)
 
 </label>
+
 
 
 
@@ -787,6 +1112,8 @@ placeholder="Ejemplo: 1.5">
 
 
 
+
+
 <label>
 
 Margen venta (%)
@@ -795,11 +1122,14 @@ Margen venta (%)
 
 
 
+
 <input
 
 id="margenVenta"
 
 placeholder="Ejemplo: 2">
+
+
 
 
 
@@ -814,11 +1144,15 @@ placeholder="Ejemplo: 2">
 
 
 
+
 <p class="info" id="estado">
 
 Cargando cotizaciones...
 
 </p>
+
+
+
 
 
 
@@ -848,6 +1182,7 @@ Cargando cotizaciones...
 
 
 
+
 </div>
 
 
@@ -856,7 +1191,7 @@ Cargando cotizaciones...
 
 
 
-<!-- MENSAJE GUARDADO -->
+<!-- NOTIFICACIÓN -->
 
 
 <div id="toast" class="toast">
@@ -864,7 +1199,6 @@ Cargando cotizaciones...
 ✅ Cambios guardados correctamente
 
 </div>
-
 <script type="module">
 
 
@@ -907,6 +1241,7 @@ from "./firebase-config.js";
 
 
 
+
 const auth = getAuth(app);
 
 
@@ -920,14 +1255,20 @@ const panel = document.getElementById("panel");
 
 
 
-// =============================
+
+
+
+// =================================
 // LOGIN
-// =============================
+// =================================
 
 
 document
+
 .getElementById("btnLogin")
+
 .onclick = async()=>{
+
 
 
 const email =
@@ -944,7 +1285,9 @@ document.getElementById("password").value;
 
 
 
+
 try{
+
 
 
 await signInWithEmailAndPassword(
@@ -956,6 +1299,7 @@ email,
 password
 
 );
+
 
 
 
@@ -974,6 +1318,8 @@ cargarCotizaciones();
 
 
 
+
+
 }
 
 
@@ -984,11 +1330,13 @@ catch(error){
 
 document.getElementById("mensaje").innerHTML =
 
-"❌ Datos incorrectos";
+"❌ Usuario o contraseña incorrectos";
 
 
 
 }
+
+
 
 
 
@@ -1002,12 +1350,15 @@ document.getElementById("mensaje").innerHTML =
 
 
 
-// =============================
-// CARGAR DATOS FIREBASE
-// =============================
+
+
+// =================================
+// CARGAR COTIZACIONES
+// =================================
 
 
 async function cargarCotizaciones(){
+
 
 
 try{
@@ -1020,15 +1371,23 @@ const datos = await obtenerCotizacionesAdmin();
 
 
 
+
+
+
+// =================
 // USDT
+// =================
+
 
 
 if(datos.USDT){
 
 
+
 document.getElementById("usdtCompra").value =
 
 datos.USDT.compra;
+
 
 
 
@@ -1046,15 +1405,22 @@ datos.USDT.venta;
 
 
 
+
+
+// =================
 // USD
+// =================
+
 
 
 if(datos.USD){
 
 
+
 document.getElementById("usdCompra").value =
 
 datos.USD.compra;
+
 
 
 
@@ -1073,19 +1439,28 @@ datos.USD.venta;
 
 
 
+
+
+// =================
 // MARGENES CRYPTO
+// =================
+
 
 
 const crypto = await obtenerMargenesCrypto();
 
 
 
+
+
 if(crypto){
+
 
 
 document.getElementById("margenCompra").value =
 
 crypto.margenCompra;
+
 
 
 
@@ -1109,11 +1484,11 @@ document.getElementById("estado").innerHTML =
 
 
 
+
 }
 
-
-
 catch(error){
+
 
 
 console.log(error);
@@ -1122,7 +1497,7 @@ console.log(error);
 
 document.getElementById("estado").innerHTML =
 
-"🔴 Error cargando datos";
+"🔴 Error cargando información";
 
 
 
@@ -1140,14 +1515,20 @@ document.getElementById("estado").innerHTML =
 
 
 
-// =============================
-// GUARDAR TODO
-// =============================
+
+
+// =================================
+// GUARDAR CAMBIOS
+// =================================
+
 
 
 document
+
 .getElementById("guardar")
+
 .onclick = async()=>{
+
 
 
 
@@ -1161,18 +1542,20 @@ document.getElementById("guardar");
 
 
 
+
 boton.innerHTML =
 
 "⏳ ACTUALIZANDO...";
 
 
 
-
-
 boton.classList.add("loading");
 
 
+
 boton.disabled=true;
+
+
 
 
 
@@ -1188,6 +1571,7 @@ document.getElementById("usdtCompra").value;
 const usdtVenta =
 
 document.getElementById("usdtVenta").value;
+
 
 
 
@@ -1227,13 +1611,14 @@ document.getElementById("margenVenta").value;
 
 
 
+
 try{
 
 
 
 
 
-// ACTUALIZA USDT
+// ACTUALIZAR USDT
 
 
 await actualizarCotizacion(
@@ -1252,8 +1637,7 @@ usdtVenta
 
 
 
-
-// ACTUALIZA USD
+// ACTUALIZAR USD
 
 
 await actualizarCotizacion(
@@ -1272,8 +1656,7 @@ usdVenta
 
 
 
-
-// ACTUALIZA CRYPTO
+// ACTUALIZAR MARGENES BINANCE
 
 
 await actualizarMargenesCrypto(
@@ -1290,10 +1673,9 @@ margenVenta
 
 
 
-
 document.getElementById("estado").innerHTML =
 
-"🟢 Cambios actualizados correctamente";
+"🟢 Datos actualizados correctamente";
 
 
 
@@ -1301,7 +1683,9 @@ document.getElementById("estado").innerHTML =
 
 
 
-// MOSTRAR TOAST
+
+
+// TOAST
 
 
 const toast =
@@ -1311,6 +1695,8 @@ document.getElementById("toast");
 
 
 toast.classList.add("show");
+
+
 
 
 
@@ -1330,8 +1716,6 @@ toast.classList.remove("show");
 
 
 }
-
-
 
 
 
@@ -1366,7 +1750,9 @@ boton.innerHTML =
 boton.classList.remove("loading");
 
 
+
 boton.disabled=false;
+
 
 
 
@@ -1381,17 +1767,24 @@ boton.disabled=false;
 
 
 
-// =============================
+
+
+// =================================
 // CERRAR SESIÓN
-// =============================
+// =================================
+
 
 
 document
+
 .getElementById("logout")
+
 .onclick = ()=>{
 
 
+
 signOut(auth);
+
 
 
 location.reload();
@@ -1402,8 +1795,10 @@ location.reload();
 
 
 
-</script>
 
+
+
+</script>
 
 
 </body>
