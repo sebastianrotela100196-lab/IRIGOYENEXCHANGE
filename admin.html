@@ -108,12 +108,26 @@ background:#00c95b;
 }
 
 
+/* BOTON GUARDANDO */
+
+.loading{
+
+opacity:0.6;
+
+cursor:not-allowed;
+
+}
+
+
+
+/* PANEL */
 
 #panel{
 
 display:none;
 
 }
+
 
 
 .card{
@@ -157,7 +171,59 @@ margin-top:10px;
 }
 
 
+
+/* MENSAJE ANIMADO */
+
+.toast{
+
+
+position:fixed;
+
+bottom:30px;
+
+left:50%;
+
+transform:translateX(-50%) translateY(100px);
+
+
+background:#00b94f;
+
+color:white;
+
+padding:15px 25px;
+
+border-radius:12px;
+
+
+font-weight:bold;
+
+
+opacity:0;
+
+
+transition:0.4s;
+
+
+box-shadow:0 0 25px #00ff8855;
+
+
+}
+
+
+
+.toast.show{
+
+
+opacity:1;
+
+transform:translateX(-50%) translateY(0);
+
+
+}
+
+
 </style>
+
 
 </head>
 
@@ -174,10 +240,6 @@ IRIGOYEN <span>EXCHANGE</span>
 </div>
 
 
-
-
-
-<!-- LOGIN -->
 
 <div id="login">
 
@@ -214,17 +276,13 @@ INGRESAR
 
 
 
-
-
-<!-- PANEL ADMIN -->
-
-
 <div id="panel">
 
 
 <h2>
 Panel de Control
 </h2>
+
 
 
 <div class="card">
@@ -246,7 +304,6 @@ placeholder="Venta">
 
 
 </div>
-
 
 
 
@@ -296,19 +353,17 @@ CERRAR SESIÓN
 </button>
 
 
+</div>
+
 
 </div>
 
 
+<div id="toast" class="toast">
+
+✅ Cambios guardados correctamente
 
 </div>
-
-
-
-
-
-
-
 
 <script type="module">
 
@@ -330,7 +385,6 @@ from
 
 
 
-
 import {
 
 app,
@@ -347,14 +401,13 @@ from "./firebase-config.js";
 
 
 
-const auth=getAuth(app);
+const auth = getAuth(app);
 
 
 
+const login = document.getElementById("login");
 
-const login=document.getElementById("login");
-
-const panel=document.getElementById("panel");
+const panel = document.getElementById("panel");
 
 
 
@@ -367,14 +420,14 @@ const panel=document.getElementById("panel");
 
 document
 .getElementById("btnLogin")
-.onclick=async()=>{
+.onclick = async()=>{
 
 
-let email=
+const email = 
 document.getElementById("email").value;
 
 
-let password=
+const password =
 document.getElementById("password").value;
 
 
@@ -383,9 +436,13 @@ try{
 
 
 await signInWithEmailAndPassword(
+
 auth,
+
 email,
+
 password
+
 );
 
 
@@ -406,8 +463,9 @@ cargarCotizaciones();
 catch(error){
 
 
-document.getElementById("mensaje")
-.innerHTML="Datos incorrectos";
+document.getElementById("mensaje").innerHTML =
+
+"❌ Datos incorrectos";
 
 
 }
@@ -438,15 +496,17 @@ const datos = await obtenerCotizacionesAdmin();
 
 
 
-
 if(datos.USDT){
 
 
 document.getElementById("usdtCompra").value =
+
 datos.USDT.compra;
 
 
+
 document.getElementById("usdtVenta").value =
+
 datos.USDT.venta;
 
 
@@ -460,10 +520,13 @@ if(datos.USD){
 
 
 document.getElementById("usdCompra").value =
+
 datos.USD.compra;
 
 
+
 document.getElementById("usdVenta").value =
+
 datos.USD.venta;
 
 
@@ -478,8 +541,8 @@ document.getElementById("estado").innerHTML =
 "✅ Cotizaciones cargadas correctamente";
 
 
-
 }
+
 
 catch(error){
 
@@ -495,6 +558,7 @@ document.getElementById("estado").innerHTML =
 }
 
 
+
 }
 
 
@@ -503,35 +567,65 @@ document.getElementById("estado").innerHTML =
 
 
 
+
 // =============================
-// GUARDAR CAMBIOS
+// GUARDAR CAMBIOS CON ANIMACIÓN
 // =============================
 
 
 document
 .getElementById("guardar")
-.onclick=async()=>{
+.onclick = async()=>{
+
+
+
+const boton = 
+document.getElementById("guardar");
+
+
+
+boton.innerHTML = "⏳ GUARDANDO...";
+
+
+boton.classList.add("loading");
+
+
+boton.disabled = true;
+
+
+
 
 
 const usdtCompra =
+
 document.getElementById("usdtCompra").value;
 
 
+
 const usdtVenta =
+
 document.getElementById("usdtVenta").value;
 
 
 
+
 const usdCompra =
+
 document.getElementById("usdCompra").value;
 
 
+
 const usdVenta =
+
 document.getElementById("usdVenta").value;
 
 
 
+
+
+
 try{
+
 
 
 await actualizarCotizacion(
@@ -543,6 +637,8 @@ usdtCompra,
 usdtVenta
 
 );
+
+
 
 
 
@@ -558,18 +654,51 @@ usdVenta
 
 
 
+
+
+
 document.getElementById("estado").innerHTML =
 
 "✅ Cambios guardados correctamente";
 
 
 
+
+
+// MOSTRAR ALERTA ANIMADA
+
+
+const toast = document.getElementById("toast");
+
+
+toast.classList.add("show");
+
+
+
+
+
+setTimeout(()=>{
+
+
+toast.classList.remove("show");
+
+
+},3000);
+
+
+
+
+
 }
+
+
 
 catch(error){
 
 
+
 console.log(error);
+
 
 
 document.getElementById("estado").innerHTML =
@@ -581,8 +710,24 @@ document.getElementById("estado").innerHTML =
 
 
 
-};
 
+
+// RESTAURAR BOTÓN
+
+
+boton.innerHTML =
+
+"GUARDAR CAMBIOS";
+
+
+boton.classList.remove("loading");
+
+
+boton.disabled = false;
+
+
+
+};
 
 
 
@@ -598,7 +743,7 @@ document.getElementById("estado").innerHTML =
 
 document
 .getElementById("logout")
-.onclick=()=>{
+.onclick = ()=>{
 
 
 signOut(auth);
@@ -607,8 +752,8 @@ signOut(auth);
 location.reload();
 
 
-};
 
+};
 
 
 
