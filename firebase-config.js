@@ -12,7 +12,8 @@ import {
 getFirestore,
 doc,
 getDoc,
-updateDoc
+updateDoc,
+serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
@@ -242,6 +243,11 @@ null
 
 
 }
+
+
+
+
+
 // =======================================
 // ACTUALIZAR COTIZACIONES
 // =======================================
@@ -252,6 +258,7 @@ moneda,
 compra,
 venta
 ){
+
 
 
 const referencia = doc(
@@ -268,11 +275,14 @@ referencia,
 
 compra:Number(compra),
 
-venta:Number(venta)
+venta:Number(venta),
+
+ultimaActualizacion: serverTimestamp()
 
 }
 
 );
+
 
 
 }
