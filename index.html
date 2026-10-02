@@ -978,11 +978,32 @@ grid-template-columns:1fr;
 
 <style>
 .skip-link{position:fixed;left:12px;top:-60px;z-index:2000;background:#fff;color:#000;padding:12px 16px;border-radius:8px}.skip-link:focus{top:12px}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #FDCC05;outline-offset:3px}
-.form-consent{margin:22px 0 0;padding:16px;border:1px solid #3b4a44;border-radius:14px;background:#07100d}.form-consent label{display:flex;gap:12px;align-items:flex-start;line-height:1.5}.form-consent input{width:20px;height:20px;margin:2px 0 0;flex:0 0 auto}.form-consent a,.legal-card a,.legal-links a{color:#FDCC05}.consent-error{margin-top:10px;color:#ffb4b4}
-.legal-section{background:#07100d}.legal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.legal-card{background:#0B1511;border:1px solid #34453e;border-radius:20px;padding:28px;scroll-margin-top:100px}.legal-card h3{color:#FDCC05;margin-bottom:14px}.legal-card p{color:#fff;line-height:1.7;margin:10px 0}.legal-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:20px 0}.legal-links a{text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #FDCC05;outline-offset:3px}
+
+/* Consentimiento de WhatsApp: compacto y fuera del grid de resultados */
+.form-consent{width:100%;margin:14px 0 4px}
+.form-consent label{display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:#cfd8d3;font-size:12px;line-height:1.4;text-align:left}
+.form-consent input[type="checkbox"]{width:15px;height:15px;margin:0;flex:0 0 15px;accent-color:#078F3D;cursor:pointer}
+.form-consent a,.legal-content a,.legal-links a{color:#FDCC05;text-decoration:underline;text-underline-offset:2px}
+.form-consent a:hover,.form-consent a:focus{color:#fff}
+.consent-error{margin:7px 0 0;text-align:center;color:#ffb4b4;font-size:12px}
+
+/* Información legal en acordeón */
+.legal-section{background:#07100d;padding:80px 0}
+.legal-accordion{width:100%;max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.legal-item{background:#0B1511;border:1px solid #34463f;border-radius:16px;overflow:hidden;scroll-margin-top:100px}
+.legal-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;color:#FDCC05;font-size:16px;font-weight:700;transition:.25s}
+.legal-item summary::-webkit-details-marker{display:none}
+.legal-item summary::after{content:"+";color:#FDCC05;font-size:24px;font-weight:400;line-height:1}
+.legal-item[open] summary::after{content:"−"}
+.legal-item summary:hover{background:rgba(255,255,255,.025)}
+.legal-content{padding:0 24px 22px;color:#F9F5EA;font-size:14px;line-height:1.7}
+.legal-content p{margin:0 0 12px}.legal-content p:last-child{margin-bottom:0}
+.legal-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:20px 0}.legal-links a{text-decoration:underline;text-underline-offset:3px}
+
 .cookie-banner{position:fixed;left:20px;right:20px;bottom:20px;z-index:3000;display:flex;justify-content:space-between;align-items:center;gap:20px;background:#0B1511;color:#fff;border:1px solid #FDCC05;border-radius:18px;padding:20px;box-shadow:0 12px 40px rgba(0,0,0,.6)}.cookie-banner[hidden]{display:none}.cookie-banner p{margin:6px 0 0;line-height:1.5}.cookie-actions{display:flex;gap:10px;flex:0 0 auto}.cookie-actions button{border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.cookie-primary{background:#078F3D;color:#fff;border:1px solid #078F3D}.cookie-secondary{background:#fff;color:#111;border:1px solid #fff}
-@media(max-width:760px){.legal-grid{grid-template-columns:1fr}.cookie-banner{flex-direction:column;align-items:stretch}.cookie-actions{width:100%}.cookie-actions button{flex:1}}
+@media(max-width:760px){.cookie-banner{flex-direction:column;align-items:stretch}.cookie-actions{width:100%}.cookie-actions button{flex:1}.legal-section{padding:60px 0}.legal-item summary{padding:17px 18px;font-size:14px}.legal-content{padding:0 18px 18px;font-size:13px}}
+@media(max-width:600px){.form-consent label{justify-content:flex-start;font-size:11px}.consent-error{text-align:left;font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 
@@ -2499,9 +2520,9 @@ Gs. 2.980.000
 <div class="form-consent">
 <label for="formConsent">
 <input id="formConsent" type="checkbox">
-<span>Acepto que los datos de esta cotización se envíen a Irigoyen Exchange mediante WhatsApp para atender mi solicitud. He leído la <a href="#privacidad">Política de privacidad</a>.</span>
+<span>Acepto el envío de estos datos por WhatsApp y la <a href="#privacidad">Política de privacidad</a>.</span>
 </label>
-<p id="consentError" class="consent-error" role="alert" hidden>Debes aceptar el envío de estos datos antes de continuar.</p>
+<p id="consentError" class="consent-error" role="alert" hidden>Debes aceptar antes de continuar.</p>
 </div>
 
 <button
@@ -3537,14 +3558,64 @@ FOOTER
 <section id="legal" class="legal-section" aria-labelledby="legal-title">
 <div class="container">
 <h2 id="legal-title" class="section-title">Información legal y privacidad</h2>
-<p class="section-subtitle">Información clara sobre el uso del sitio, datos personales, cookies y servicios de terceros.</p>
-<div class="legal-grid">
-<article id="negocio" class="legal-card"><h3>Datos del negocio</h3><p><strong>Nombre comercial:</strong> Irigoyen Exchange.</p><p><strong>Sitio web:</strong> irigoyenexchange.com.py.</p><p><strong>Contacto operativo:</strong> WhatsApp +595 986 421 779 e Instagram @irigoyenex.py.</p><p>El sitio ofrece información y solicitud de cotizaciones para operaciones con activos digitales. La disponibilidad y el precio final se confirman antes de cada operación.</p></article>
-<article id="privacidad" class="legal-card"><h3>Política de privacidad</h3><p>Este sitio solicita únicamente los datos necesarios para preparar y enviar una solicitud de cotización: tipo de operación, activo, cantidad, banco y método de entrega. Al continuar por WhatsApp, esos datos se envían a dicho servicio para atender la solicitud.</p><p>No se solicita en este formulario información de tarjetas, claves bancarias, contraseñas ni frases semilla. No compartas ese tipo de información por el sitio o por mensajería.</p><p>Los datos enviados por WhatsApp quedan sujetos también a las prácticas de privacidad del proveedor de mensajería.</p></article>
-<article id="cookies" class="legal-card"><h3>Política de cookies</h3><p>El sitio utiliza almacenamiento local estrictamente necesario para recordar tu elección sobre cookies. Actualmente no se activa analítica publicitaria o de comportamiento desde este sitio. Si en el futuro se incorpora analítica no esencial, deberá cargarse únicamente después de tu consentimiento.</p><p>Puedes borrar la preferencia almacenada desde la configuración de datos del sitio de tu navegador.</p></article>
-<article id="terminos" class="legal-card"><h3>Términos y condiciones</h3><p>Las cotizaciones mostradas son informativas y pueden cambiar por movimientos del mercado o disponibilidad. Una solicitud enviada desde la calculadora no constituye por sí sola una operación confirmada. La operación se considera sujeta a confirmación expresa de disponibilidad, precio y condiciones por Irigoyen Exchange.</p><p>El usuario es responsable de revisar los datos de su solicitud antes de enviarla y de cumplir las obligaciones legales y fiscales que le correspondan.</p></article>
-<article id="reembolsos" class="legal-card"><h3>Política de reembolsos</h3><p>Debido a la naturaleza y variación de precio de los activos digitales, cualquier cancelación, devolución o corrección debe evaluarse según el estado concreto de la operación. Antes de transferir fondos o activos, confirma monto, red, dirección, precio y condiciones. Si existe un error o una operación pendiente, contacta inmediatamente a Irigoyen Exchange por el canal oficial.</p></article>
-<article id="integraciones" class="legal-card"><h3>Integraciones de terceros</h3><p>El sitio consulta precios públicos de Binance para calcular referencias de BTC, ETH, SOL y BNB, y utiliza WhatsApp para iniciar solicitudes de operación e Instagram como canal social. Al abrir esos servicios abandonas este sitio y se aplican las políticas del proveedor correspondiente.</p><p>Las referencias de mercado de terceros pueden sufrir retrasos, interrupciones o cambios y no garantizan el precio final de una operación.</p></article>
+<p class="section-subtitle">Consultá nuestras políticas e información legal.</p>
+
+<div class="legal-accordion">
+<details id="negocio" class="legal-item">
+<summary>Datos del negocio</summary>
+<div class="legal-content">
+<p><strong>Nombre comercial:</strong> Irigoyen Exchange.</p>
+<p><strong>Sitio web:</strong> irigoyenexchange.com.py.</p>
+<p><strong>Contacto operativo:</strong> WhatsApp +595 986 421 779 e Instagram @irigoyenex.py.</p>
+<p>El sitio ofrece información y solicitud de cotizaciones para operaciones con activos digitales. La disponibilidad y el precio final se confirman antes de cada operación.</p>
+</div>
+</details>
+
+<details id="privacidad" class="legal-item">
+<summary>Política de privacidad</summary>
+<div class="legal-content">
+<p>Este sitio solicita únicamente los datos necesarios para preparar y enviar una solicitud de cotización: tipo de operación, activo, cantidad, banco y método de entrega.</p>
+<p>Al continuar por WhatsApp, esos datos se envían a dicho servicio para atender la solicitud.</p>
+<p>No se solicita en este formulario información de tarjetas, claves bancarias, contraseñas ni frases semilla. No compartas este tipo de información por el sitio o por mensajería.</p>
+<p>Los datos enviados por WhatsApp quedan sujetos también a las prácticas de privacidad del proveedor de mensajería.</p>
+</div>
+</details>
+
+<details id="cookies" class="legal-item">
+<summary>Política de cookies</summary>
+<div class="legal-content">
+<p>El sitio utiliza almacenamiento local estrictamente necesario para recordar tu elección sobre cookies.</p>
+<p>Actualmente no se activa analítica publicitaria o de comportamiento desde este sitio. Si en el futuro se incorpora analítica no esencial, deberá cargarse únicamente después de tu consentimiento.</p>
+<p>Puedes borrar la preferencia almacenada desde la configuración de datos del sitio de tu navegador.</p>
+</div>
+</details>
+
+<details id="terminos" class="legal-item">
+<summary>Términos y condiciones</summary>
+<div class="legal-content">
+<p>Las cotizaciones mostradas son informativas y pueden cambiar por movimientos del mercado o disponibilidad.</p>
+<p>Una solicitud enviada desde la calculadora no constituye por sí sola una operación confirmada. La operación queda sujeta a confirmación expresa de disponibilidad, precio y condiciones por Irigoyen Exchange.</p>
+<p>El usuario es responsable de revisar los datos de su solicitud antes de enviarla y de cumplir las obligaciones legales y fiscales que le correspondan.</p>
+</div>
+</details>
+
+<details id="reembolsos" class="legal-item">
+<summary>Política de reembolsos</summary>
+<div class="legal-content">
+<p>Debido a la naturaleza y variación de precio de los activos digitales, cualquier cancelación, devolución o corrección debe evaluarse según el estado concreto de la operación.</p>
+<p>Antes de transferir fondos o activos, confirma monto, red, dirección, precio y condiciones.</p>
+<p>Si existe un error o una operación pendiente, contacta inmediatamente a Irigoyen Exchange por el canal oficial.</p>
+</div>
+</details>
+
+<details id="integraciones" class="legal-item">
+<summary>Integraciones de terceros</summary>
+<div class="legal-content">
+<p>El sitio consulta precios públicos de Binance para calcular referencias de BTC, ETH, SOL y BNB, y utiliza WhatsApp para iniciar solicitudes de operación e Instagram como canal social.</p>
+<p>Al abrir esos servicios abandonas este sitio y se aplican las políticas del proveedor correspondiente.</p>
+<p>Las referencias de mercado de terceros pueden sufrir retrasos, interrupciones o cambios y no garantizan el precio final de una operación.</p>
+</div>
+</details>
 </div>
 </div>
 </section>
@@ -4051,13 +4122,32 @@ flex-direction:column;
 </style>
 
 
+<script>
+document.querySelectorAll(".legal-item").forEach((item) => {
+  item.addEventListener("toggle", () => {
+    if (!item.open) return;
+    document.querySelectorAll(".legal-item").forEach((other) => {
+      if (other !== item) other.removeAttribute("open");
+    });
+  });
+});
+
+/* Si se llega desde un enlace del footer, abre automáticamente esa política. */
+function abrirPoliticaDesdeHash(){
+  const id = window.location.hash.slice(1);
+  if (!id) return;
+  const item = document.getElementById(id);
+  if (item && item.classList.contains("legal-item")) item.open = true;
+}
+window.addEventListener("hashchange", abrirPoliticaDesdeHash);
+abrirPoliticaDesdeHash();
+</script>
+
 <div id="cookieBanner" class="cookie-banner" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieText" hidden>
 <div><strong id="cookieTitle">Preferencias de cookies</strong><p id="cookieText">Usamos almacenamiento local esencial para recordar tu elección. La analítica no esencial no está activa actualmente.</p></div>
 <div class="cookie-actions"><button type="button" id="rejectCookies" class="cookie-secondary">Solo esenciales</button><button type="button" id="acceptCookies" class="cookie-primary">Aceptar</button></div>
 </div>
 
 </body>
-
-</html>
 
 </html>
